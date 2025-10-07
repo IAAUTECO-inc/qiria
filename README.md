@@ -1,4 +1,4 @@
-# Qiria - Secure Hybrid Assistant
+# Qiria 
 
 ## 🇬🇧 English
 
