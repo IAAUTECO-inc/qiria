@@ -55,5 +55,6 @@ Le modèle de menace de Qiria est basé sur le framework STRIDE (Spoofing, Tampe
 ## 5. Journalisation et Audit
 
 -   **Journalisation structurée** : Tous les services génèrent des logs au format JSON.
+-   **Objectif de journalisation structurée** : Il est prévu que tous les services génèrent des logs au format JSON pour faciliter l'analyse et la corrélation.
 -   **Piste d'audit immuable** : Les événements de sécurité critiques (authentification réussie/échouée, accès aux ressources, actions d'administration) sont journalisés.
 -   **Centralisation** : Les logs sont collectés par l'orchestrateur (Kubernetes) et transférés vers un système de gestion de logs sécurisé (SIEM) où ils sont protégés contre toute modification.
