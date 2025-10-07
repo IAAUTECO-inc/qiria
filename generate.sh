@@ -23,7 +23,16 @@
 #    pip install grpcio-tools
 
 echo "Generating Go code..."
-protoc --go_out=. --go_opt=paths=source_relative --go-grpc_out=. --go-grpc_opt=paths=source_relative qiria.proto
+mkdir -p services/core/api/gen
+protoc --proto_path=api/proto \
+       --go_out=services/core/api/gen --go_opt=paths=source_relative \
+       --go-grpc_out=services/core/api/gen --go-grpc_opt=paths=source_relative \
+       api/proto/qiria.proto
 
 echo "Generating Python code..."
-python -m grpc_tools.protoc -I. --python_out=. --grpc_python_out=. qiria.proto
+mkdir -p services/ui/api/gen
+python -m grpc_tools.protoc --proto_path=api/proto \
+       --python_out=services/ui/api/gen \
+       --pyi_out=services/ui/api/gen \
+       --grpc_python_out=services/ui/api/gen \
+       api/proto/qiria.proto

@@ -5,7 +5,7 @@ import (
 	"log"
 	"net"
 
-	pb "qiria/core" // Importe le code généré par protoc
+	pb "qiria/core/api/gen" // Importe le code généré par protoc
 
 	"google.golang.org/grpc"
 )
@@ -29,13 +29,11 @@ func (s *server) RequestReport(ctx context.Context, in *pb.ReportRequest) (*pb.R
 }
 
 func main() {
-	// Démarre un listener sur le port 50051.
 	lis, err := net.Listen("tcp", ":50051")
 	if err != nil {
 		log.Fatalf("failed to listen: %v", err)
 	}
 
-	// Crée une nouvelle instance du serveur gRPC.
 	s := grpc.NewServer()
 	pb.RegisterQiriaCoreServer(s, &server{})
 	log.Printf("Qiria Core gRPC server listening at %v", lis.Addr())

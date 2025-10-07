@@ -1,8 +1,15 @@
 import grpc
-import qiria_pb2
-import qiria_pb2_grpc
 import json
 import logging
+import sys
+from pathlib import Path
+
+# Ajoute le dossier 'api/gen' au path pour trouver les modules gRPC générés
+api_gen_path = Path(__file__).resolve().parent / 'api/gen'
+sys.path.append(str(api_gen_path))
+
+import qiria_pb2
+import qiria_pb2_grpc
 
 def run():
     """
@@ -12,7 +19,6 @@ def run():
     logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
     logging.info("Connecting to gRPC server at localhost:50051...")
-    # NOTE: Uses an insecure channel for local development.
     with grpc.insecure_channel('localhost:50051') as channel:
         stub = qiria_pb2_grpc.QiriaCoreStub(channel)
 

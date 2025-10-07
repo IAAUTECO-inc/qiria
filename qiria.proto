@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+package qiria;
+
+option go_package = "qiria/core/api/gen";
+
+// Service principal exposé par le Serveur Cœur (Go)
+// pour être appelé par les clients (comme l'IHM Qt).
+service QiriaCore {
+    // Demande la génération d'un rapport.
+    // Le Cœur se chargera de transmettre cette tâche au worker approprié.
+    rpc RequestReport(ReportRequest) returns (ReportResponse);
+}
+
+// Le message de requête pour un rapport.
+message ReportRequest {
+    // Identifiant unique du type de rapport à générer (ex: "nis2_compliance_v1").
+    string report_id = 1;
+
+    // Paramètres pour le rapport, sous forme de clé-valeur JSON.
+    // Exemple: {"target_host": "10.0.1.5", "start_date": "2023-10-26"}
+    string parameters_json = 2;
+}
+
+// La réponse suite à une demande de rapport.
+message ReportResponse {
+    // Un identifiant de tâche unique pour suivre la progression de la génération.
+    string task_id = 1;
+
+    // Statut initial de la tâche (ex: "QUEUED", "ACCEPTED").
+    string status = 2;
+}
