@@ -1,2 +1,2 @@
-# grpcio
-# ... autres dépendances pour le sandboxing
+grpcio
+grpcio-tools
