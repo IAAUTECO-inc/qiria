@@ -1,3 +1,3 @@
-# User Guide
+# Guide Utilisateur
 
-*Content to be added.*
+*Contenu à ajouter.*

@@ -1,0 +1,2 @@
+# grpcio
+# ... autres dépendances pour le sandboxing
