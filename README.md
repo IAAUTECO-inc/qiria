@@ -8,7 +8,7 @@ Qiria is a secure, on-premise, hybrid application designed as an **advanced repo
 
 The entire system is designed to be deployed and orchestrated via Kubernetes.
 
-### Architecture (Apache-inspired modular model)
+### Architecture (Modular Model)
 
 - **Core Server (`/services/core`)**: Written in **Go**. Acts as the lean, secure core of the system. It handles all incoming network requests, manages authentication (token validation) and authorization, and dispatches tasks to the appropriate worker modules via gRPC or a message queue. It is the single entry point, enforcing the Zero Trust security policy.
 - **Worker Modules (`/services/workers`)**: A collection of specialized services written in **Python**, each handling a specific task:
@@ -34,7 +34,7 @@ Qiria est une application hybride, sécurisée et "on-premise", conçue comme un
 
 L'ensemble du système est conçu pour être déployé et orchestré via Kubernetes.
 
-### Architecture (Modèle modulaire inspiré d'Apache)
+### Architecture (Modèle modulaire)
 
 - **Serveur Cœur (`/services/core`)**: Écrit en **Go**. Agit comme le cœur système, à la fois minimaliste et sécurisé. Il gère toutes les requêtes réseau entrantes, l'authentification (validation des tokens), les autorisations, et distribue les tâches aux modules de traitement (workers) via gRPC ou une file de messages. C'est le point d'entrée unique, appliquant la politique de sécurité Zero Trust.
 - **Modules Workers (`/services/workers`)**: Une collection de services spécialisés écrits en **Python**, chacun gérant une tâche spécifique :

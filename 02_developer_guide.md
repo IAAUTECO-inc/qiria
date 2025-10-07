@@ -4,7 +4,7 @@ Ce document décrit l'architecture technique de Qiria et les conventions de dév
 
 ## Architecture
 
-Le système est basé sur une architecture microservices inspirée du modèle modulaire d'Apache.
+Le système est basé sur une architecture microservices avec un modèle modulaire.
 
 - **Serveur Cœur (`/services/core`)**: Écrit en Go. Point d'entrée unique, il gère l'authentification, les autorisations et la distribution des tâches.
 - **Modules Workers (`/services/workers`)**: Services Python spécialisés pour le reporting, le scripting et l'audit.
