@@ -20,6 +20,10 @@ The entire system is designed to be deployed and orchestrated via Kubernetes.
 - **CI/CD (`/.github/workflows`)**: Automated workflows for building, testing, scanning (SBOM, vulnerabilities), and deploying the applications.
 - **Documentation (`/docs`)**: Contains user, developer, and auditor guides.
 
+### A Note on the Name
+
+The project is named after Qiria, a character from Iain M. Banks' renowned "Culture" series of science fiction novels. This choice reflects the project's ambition to be an advanced, intelligent, and reliable system, much like the entities within that universe.
+
 ---
 
 ## 🇫🇷 Français
@@ -41,3 +45,7 @@ L'ensemble du système est conçu pour être déployé et orchestré via Kuberne
 - **Déploiement (`/deployments`)**: Contient les manifestes Kubernetes (ou charts Helm) pour déployer tous les microservices, bases de données et l'infrastructure requise de manière reproductible et auditable.
 - **CI/CD (`/.github/workflows`)**: Workflows automatisés pour compiler, tester, analyser (SBOM, vulnérabilités) et déployer les applications.
 - **Documentation (`/docs`)**: Contient les guides utilisateur, développeur et auditeur.
+
+### Note sur le nom
+
+Le projet est nommé d'après Qiria, un personnage de la célèbre série de romans de science-fiction "Cycle de la Culture" de Iain M. Banks. Ce choix reflète l'ambition du projet d'être un système avancé, intelligent et fiable, à l'image des entités de cet univers.
