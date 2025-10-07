@@ -1,0 +1,51 @@
+# English: Name of the GitHub Actions workflow.
+# Français: Nom du workflow GitHub Actions.
+name: CI - Build, Test, and Scan
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build-and-test-go:
+    name: Build & Test (Go)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.22'
+
+      - name: Build
+        run: go build -v ./...
+        working-directory: ./services/api-server
+
+      - name: Test
+        run: go test -v ./...
+        working-directory: ./services/api-server
+
+  build-and-test-python:
+    name: Build & Test (Python)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          # pip install -r requirements.txt
+        working-directory: ./services/qiria-assistant
+
+      - name: Linter (Flake8)
+        run: |
+          # pip install flake8
+          # flake8 .

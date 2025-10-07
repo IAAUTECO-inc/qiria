@@ -1,0 +1,29 @@
+# General
+*.swp
+*~
+.DS_Store
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+venv/
+*.egg-info/
+dist/
+build/
+
+# Go
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Binaries
+/bin
+/vendor
+
+# IDE files
+.idea/
+.vscode/
