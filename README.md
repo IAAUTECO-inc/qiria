@@ -4,14 +4,18 @@
 
 ### Project Overview
 
-Qiria is a secure, on-premise, hybrid application designed to meet the stringent requirements of NIS2, ISO 27001, and Zero Trust architecture. It combines a high-performance backend written in Go with a flexible and accessible user-facing assistant written in Python with a Qt GUI.
+Qiria is a secure, on-premise, hybrid application designed as an **advanced reporting server** to meet the stringent requirements of NIS2, ISO 27001, and Zero Trust architecture. It combines a high-performance backend written in Go with a flexible user interface and scripting engine in Python with a Qt GUI.
 
 The entire system is designed to be deployed and orchestrated via Kubernetes.
 
-### Architecture
+### Architecture (Apache-inspired modular model)
 
-- **Backend Services (`/services/api-server`)**: Written in **Go**. Responsible for core business logic, API endpoints (REST/gRPC), database interactions, and security-critical operations.
-- **Assistant Service (`/services/qiria-assistant`)**: Written in **Python**. Provides the "Super Siri" assistant functionality, the Qt graphical user interface, integration with local AI/ML models, and dynamic reporting/scripting capabilities.
+- **Core Server (`/services/qiria-core`)**: Written in **Go**. Acts as the lean, secure core of the system. It handles all incoming network requests, manages authentication (token validation) and authorization, and dispatches tasks to the appropriate worker modules via gRPC or a message queue. It is the single entry point, enforcing the Zero Trust security policy.
+- **Worker Modules (`/services/workers/*`)**: A collection of specialized services written in **Python**, each handling a specific task:
+  - `reporting-worker`: Generates complex compliance and business reports.
+  - `scripting-worker`: Executes dynamic automation scripts.
+  - `audit-worker`: Integrates with AI/ML models for advanced data analysis and auditing.
+- **User Interface (`/services/qiria-ui`)**: A **Python** application using the Qt framework. It acts as a rich client that communicates exclusively with the **Core Server**'s secure API.
 - **Deployment (`/deployments`)**: Contains Kubernetes manifests (or Helm charts) for deploying all microservices, databases, and required infrastructure in a reproducible and auditable manner.
 - **CI/CD (`/.github/workflows`)**: Automated workflows for building, testing, scanning (SBOM, vulnerabilities), and deploying the applications.
 
@@ -21,13 +25,17 @@ The entire system is designed to be deployed and orchestrated via Kubernetes.
 
 ### Aperçu du projet
 
-Qiria est une application hybride, sécurisée et "on-premise", conçue pour répondre aux exigences strictes des normes NIS2, ISO 27001 et de l'architecture Zero Trust. Elle combine un backend haute performance écrit en Go avec un assistant utilisateur flexible et accessible écrit en Python avec une IHM en Qt.
+Qiria est une application hybride, sécurisée et "on-premise", conçue comme un **serveur de reporting évolué** pour répondre aux exigences strictes des normes NIS2, ISO 27001 et de l'architecture Zero Trust. Elle combine un backend haute performance écrit en Go avec une interface utilisateur flexible et un moteur de scripting en Python avec une IHM en Qt.
 
 L'ensemble du système est conçu pour être déployé et orchestré via Kubernetes.
 
-### Architecture
+### Architecture (Modèle modulaire inspiré d'Apache)
 
-- **Services Backend (`/services/api-server`)**: Écrits en **Go**. Responsables de la logique métier principale, des points d'accès API (REST/gRPC), des interactions avec la base de données, de la gestion des tokens et des opérations critiques pour la sécurité.
-- **Service Assistant (`/services/qiria-assistant`)**: Écrit en **Python**. Fournit la fonctionnalité d'assistant "Super Siri", l'interface graphique Qt, l'intégration avec les modèles d'IA/ML locaux (audit, etc.) et les capacités de reporting/scripting dynamiques.
+- **Serveur Cœur (`/services/qiria-core`)**: Écrit en **Go**. Agit comme le cœur système, à la fois minimaliste et sécurisé. Il gère toutes les requêtes réseau entrantes, l'authentification (validation des tokens), les autorisations, et distribue les tâches aux modules de traitement (workers) via gRPC ou une file de messages. C'est le point d'entrée unique, appliquant la politique de sécurité Zero Trust.
+- **Modules Workers (`/services/workers/*`)**: Une collection de services spécialisés écrits en **Python**, chacun gérant une tâche spécifique :
+  - `reporting-worker` : Génère les rapports complexes (conformité, métier).
+  - `scripting-worker` : Exécute les scripts d'automatisation dynamiques.
+  - `audit-worker` : S'intègre aux modèles d'IA/ML pour l'analyse de données et l'audit.
+- **Interface Utilisateur (`/services/qiria-ui`)**: Une application **Python** utilisant le framework Qt. Elle fonctionne comme un client riche qui communique exclusivement avec l'API sécurisée du **Serveur Cœur**.
 - **Déploiement (`/deployments`)**: Contient les manifestes Kubernetes (ou charts Helm) pour déployer tous les microservices, bases de données et l'infrastructure requise de manière reproductible et auditable.
 - **CI/CD (`/.github/workflows`)**: Workflows automatisés pour compiler, tester, analyser (SBOM, vulnérabilités) et déployer les applications.
