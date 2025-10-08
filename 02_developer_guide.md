@@ -17,6 +17,21 @@ La communication entre le Serveur Cœur et les Workers se fait via gRPC. Les dé
 
 Le connecteur Grafana utilise également cette même interface gRPC pour interroger le Serveur Cœur, garantissant un point d'entrée unique et une politique de sécurité cohérente.
 
+## Connecteurs Externes
+
+### Connecteur FreeIPA (LDAP)
+
+Pour s'intégrer aux systèmes d'authentification d'entreprise, Qiria peut utiliser des connecteurs. Un connecteur pour **FreeIPA** est prévu pour être implémenté au sein du **Serveur Cœur**.
+
+-   **Objectif** : Permettre aux utilisateurs de s'authentifier avec leurs identifiants FreeIPA.
+-   **Fonctionnement** : Le Serveur Cœur utilisera le protocole LDAP pour communiquer avec le serveur FreeIPA.
+-   **Processus** :
+    1.  L'utilisateur fournit son nom d'utilisateur et son mot de passe via l'interface utilisateur.
+    2.  Le Serveur Cœur effectue une opération `bind` LDAP sur le serveur FreeIPA pour valider les identifiants.
+    3.  En cas de succès, il récupère les groupes de l'utilisateur dans FreeIPA.
+    4.  Ces groupes sont mappés aux rôles RBAC de Qiria (`Admin`, `User`, `Auditor`).
+    5.  Le Serveur Cœur génère un JWT contenant les permissions appropriées pour l'utilisateur.
+
 ## Conventions de Code
 
 *À définir (ex: style de code, gestion des erreurs, journalisation).*
