@@ -4,29 +4,38 @@ package qiria;
 
 option go_package = "qiria/core/api/gen";
 
-// Service principal exposé par le Serveur Cœur (Go)
-// pour être appelé par les clients (comme l'IHM Qt).
+// 🇬🇧 The core service definition for Qiria.
+// 🇫🇷 La définition du service principal de Qiria.
 service QiriaCore {
-    // Demande la génération d'un rapport.
-    // Le Cœur se chargera de transmettre cette tâche au worker approprié.
-    rpc RequestReport(ReportRequest) returns (ReportResponse);
+  // 🇬🇧 Requests a report to be generated. This is an asynchronous operation.
+  // 🇫🇷 Demande la génération d'un rapport. C'est une opération asynchrone.
+  rpc RequestReport (ReportRequest) returns (ReportResponse);
+
+  // 🇬🇧 Retrieves the status and result of a previously requested report.
+  // 🇫🇷 Récupère le statut et le résultat d'un rapport précédemment demandé.
+  rpc GetReportResult (ReportResultRequest) returns (ReportResultResponse);
 }
 
-// Le message de requête pour un rapport.
+// 🇬🇧 The request message for creating a report.
+// 🇫🇷 Le message de requête pour la création d'un rapport.
 message ReportRequest {
-    // Identifiant unique du type de rapport à générer (ex: "nis2_compliance_v1").
-    string report_id = 1;
-
-    // Paramètres pour le rapport, sous forme de clé-valeur JSON.
-    // Exemple: {"target_host": "10.0.1.5", "start_date": "2023-10-26"}
-    string parameters_json = 2;
+  string report_id = 1;
+  string parameters_json = 2; // Parameters for the report in JSON format.
 }
 
-// La réponse suite à une demande de rapport.
+// 🇬🇧 The response message containing the task ID for the report generation.
+// 🇫🇷 Le message de réponse contenant l'ID de la tâche pour la génération du rapport.
 message ReportResponse {
-    // Un identifiant de tâche unique pour suivre la progression de la génération.
-    string task_id = 1;
+  string task_id = 1;
+  string status = 2; // e.g., "QUEUED", "INVALID_REQUEST"
+}
 
-    // Statut initial de la tâche (ex: "QUEUED", "ACCEPTED").
-    string status = 2;
+message ReportResultRequest {
+  string task_id = 1;
+}
+
+message ReportResultResponse {
+  string task_id = 1;
+  string status = 2; // e.g., "PENDING", "RUNNING", "COMPLETED", "FAILED"
+  string result_json = 3; // The actual report data, in JSON format.
 }

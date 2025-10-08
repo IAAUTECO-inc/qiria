@@ -1,0 +1,20 @@
+{
+  "$schema": "https://raw.githubusercontent.com/grafana/grafana/main/docs/sources/developers/plugins/plugin.schema.json",
+  "type": "datasource",
+  "name": "Qiria Reports",
+  "id": "qiria-reports-datasource",
+  "backend": true,
+  "executable": "gpx_qiria-connector",
+  "info": {
+    "description": "Qiria datasource for Grafana",
+    "author": {
+      "name": "Qiria Project"
+    },
+    "logos": {
+      "small": "img/logo.svg",
+      "large": "img/logo.svg"
+    },
+    "version": "1.0.0",
+    "updated": "2024-01-01"
+  }
+}
