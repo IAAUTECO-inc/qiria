@@ -4,7 +4,8 @@ import logging
 import sys
 from pathlib import Path
 
-# Ajoute le dossier 'api/gen' au path pour trouver les modules gRPC générés
+# 🇬🇧 Add the 'api/gen' directory to the path to find the generated gRPC modules
+# 🇫🇷 Ajoute le dossier 'api/gen' au path pour trouver les modules gRPC générés
 api_gen_path = Path(__file__).resolve().parent / 'api/gen'
 sys.path.append(str(api_gen_path))
 
@@ -18,11 +19,12 @@ def run():
     """
     logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
-    logging.info("Connecting to gRPC server at localhost:50051...")
+    logging.info("🇬🇧 Connecting to gRPC server at localhost:50051... / 🇫🇷 Connexion au serveur gRPC sur localhost:50051...")
     with grpc.insecure_channel('localhost:50051') as channel:
         stub = qiria_pb2_grpc.QiriaCoreStub(channel)
 
-        # Create a sample request.
+        # 🇬🇧 Create a sample request.
+        # 🇫🇷 Créer une requête d'exemple.
         report_params = {
             "target_host": "srv-prod-db-01",
             "scan_profile": "full"
@@ -33,9 +35,9 @@ def run():
             parameters_json=json.dumps(report_params)
         )
 
-        logging.info(f"Sending request for report '{request.report_id}'...")
+        logging.info(f"🇬🇧 Sending request for report '{request.report_id}'... / 🇫🇷 Envoi de la requête pour le rapport '{request.report_id}'...")
         response = stub.RequestReport(request)
-        logging.info(f"Server responded with Task ID: {response.task_id} and Status: {response.status}")
+        logging.info(f"🇬🇧 Server responded with Task ID: {response.task_id} and Status: {response.status} / 🇫🇷 Réponse du serveur - Task ID: {response.task_id}, Statut: {response.status}")
 
 if __name__ == '__main__':
     run()
