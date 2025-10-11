@@ -26,10 +26,13 @@ Le modèle de menace de Qiria est basé sur le framework STRIDE (Spoofing, Tampe
     -   La logique est centralisée dans le package `auth` pour garantir une application cohérente.
 -   **Validation des entrées** :
     -   Toutes les données provenant des requêtes sont systématiquement validées pour prévenir les injections (SQLi, etc.), même si le Serveur Cœur n'interagit pas directement avec la base de données.
+-   **Délégation Sécurisée à l'Orchestrateur** :
+    -   Le Serveur Cœur communique avec l'API de Kestra via mTLS.
+    -   Il utilise un token d'API à privilège minimum pour déclencher uniquement les workflows autorisés.
 
 ### 2.2. Communication Inter-Services
 
--   **TLS Mutuel (mTLS)** : Toute communication gRPC entre le Serveur Cœur et les Workers est chiffrée et authentifiée mutuellement via mTLS.
+-   **TLS Mutuel (mTLS)** : Toute communication gRPC (Clients -> Serveur Cœur) et REST (Serveur Cœur -> Kestra) est chiffrée et authentifiée mutuellement via mTLS.
 -   **Politiques Réseau (Kubernetes Network Policies)** : Des politiques réseau strictes isolent les services. Par exemple, un `reporting-worker` ne peut communiquer qu'avec le Serveur Cœur et non avec un `scripting-worker`.
 
 ### 2.3. Workers (Python) - Isolation et Privilège Minimum
