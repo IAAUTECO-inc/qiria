@@ -28,7 +28,7 @@ jobs:
 
       - name: Test
         run: go test -v ./...
-        working-directory: ./services/api-server
+        working-directory: ./services/core
 
   test-python:
     name: Test Python Service
@@ -47,7 +47,7 @@ jobs:
           # Français: Crée un fichier requirements.txt factice pour que le workflow passe
           echo "PySide6" > requirements.txt
           pip install -r requirements.txt
-        working-directory: ./services/qiria-assistant
+        working-directory: ./services/ui
 
       - name: Lint with flake8
         run: |
@@ -74,7 +74,7 @@ jobs:
         id: build-and-push
         uses: docker/build-push-action@v5
         with:
-          context: ./services/api-server
+          context: ./services/core
           push: true
           tags: ghcr.io/${{ github.repository }}/api-server:${{ github.sha }}
 
@@ -119,7 +119,7 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
         with:
-          context: ./services/qiria-assistant
+          context: ./services/ui
           push: true
           tags: ghcr.io/${{ github.repository }}/qiria-assistant:${{ github.sha }}
 

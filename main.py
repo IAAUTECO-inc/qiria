@@ -4,13 +4,11 @@ import logging
 from pathlib import Path
 
 from PySide6.QtWidgets import (
-    QApplication, QMainWindow, QWidget, QVBoxLayout,
-    QPushButton, QLabel, QLineEdit, QTextEdit, QFormLayout,
-    QMessageBox, QDialog, QDialogButtonBox
-    QMessageBox, QDialog, QDialogButtonBox, QCheckBox
+    QApplication, QMainWindow, QWidget, QVBoxLayout, QPushButton, QLabel,
+    QLineEdit, QTextEdit, QFormLayout, QMessageBox, QDialog,
+    QDialogButtonBox, QCheckBox
 )
-from PySide6.QtCore import Slot, QThread, Signal
-from PySide6.QtCore import Slot, QThread, Signal, Qt
+from PySide6.QtCore import Slot, Qt
 
 # Ajoute le dossier 'api/gen' au path pour trouver les modules gRPC générés
 # 🇬🇧 Add the 'api/gen' directory to the path to find the generated gRPC modules
